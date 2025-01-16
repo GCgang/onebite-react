@@ -4,6 +4,7 @@ import Home from './pages/Home/Home';
 import New from './pages/New/New';
 import Diary from './pages/Diary/Diary';
 import NotFound from './pages/NotFound/NotFound';
+import { getEmotionImage } from './util/getEmotionImage';
 
 function App() {
   const nav = useNavigate();
@@ -13,6 +14,13 @@ function App() {
   };
   return (
     <>
+      <div>
+        <img src={getEmotionImage(1) ?? ''} alt='Emotion' />
+        <img src={getEmotionImage(2) ?? ''} alt='Emotion' />
+        <img src={getEmotionImage(3) ?? ''} alt='Emotion' />
+        <img src={getEmotionImage(4) ?? ''} alt='Emotion' />
+        <img src={getEmotionImage(5) ?? ''} alt='Emotion' />
+      </div>
       <div>
         <Link to={'/'}>Home</Link>
         <Link to={'/new'}>New</Link>
