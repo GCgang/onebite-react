@@ -6,6 +6,7 @@ import Diary from './pages/Diary';
 import NotFound from './pages/NotFound';
 import { getEmotionImage } from './util/getEmotionImage';
 import Button from './components/Button';
+import Header from './components/Header';
 
 function App() {
   const nav = useNavigate();
@@ -15,6 +16,11 @@ function App() {
   };
   return (
     <>
+      <Header
+        title='제목'
+        leftChild={<Button text='left' />}
+        rightChild={<Button text='right' />}
+      ></Header>
       <Button text='버튼' />
       <Button type='POSITIVE' text='버튼' />
       <Button type='NEGATIVE' text='버튼' />
