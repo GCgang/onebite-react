@@ -1,10 +1,11 @@
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
-import Home from './pages/Home/Home';
-import New from './pages/New/New';
-import Diary from './pages/Diary/Diary';
-import NotFound from './pages/NotFound/NotFound';
+import Home from './pages/Home';
+import New from './pages/New';
+import Diary from './pages/Diary';
+import NotFound from './pages/NotFound';
 import { getEmotionImage } from './util/getEmotionImage';
+import Button from './components/Button';
 
 function App() {
   const nav = useNavigate();
@@ -14,6 +15,9 @@ function App() {
   };
   return (
     <>
+      <Button text='버튼' />
+      <Button type='POSITIVE' text='버튼' />
+      <Button type='NEGATIVE' text='버튼' />
       <div>
         <img src={getEmotionImage(1) ?? ''} alt='Emotion' />
         <img src={getEmotionImage(2) ?? ''} alt='Emotion' />
