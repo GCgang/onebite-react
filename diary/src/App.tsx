@@ -3,6 +3,7 @@ import './App.css';
 import Home from './pages/Home';
 import New from './pages/New';
 import Diary from './pages/Diary';
+import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
 import { getEmotionImage } from './util/getEmotionImage';
 import Button from './components/Button';
@@ -34,13 +35,15 @@ function App() {
       <div>
         <Link to={'/'}>Home</Link>
         <Link to={'/new'}>New</Link>
-        <Link to={'/diary'}>Diary</Link>
+        <Link to={'/diary/1'}>Diary</Link>
+        <Link to={'/edit/1'}>Edit</Link>
         <button onClick={onClickButton}>New 페이지로 이동</button>
       </div>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/new' element={<New />} />
         <Route path='/diary/:id' element={<Diary />} />
+        <Route path='/edit/:id' element={<Edit />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>
