@@ -1,12 +1,12 @@
 import './Button.css';
 
-interface IButtonProps {
+interface ButtonProps {
   type?: string;
   onClick?: () => void;
   text: string;
 }
 
-export default function Button({ text, type, onClick }: IButtonProps) {
+export default function Button({ text, type, onClick }: ButtonProps) {
   return (
     <button className={`Button Button_${type}`} onClick={onClick}>
       {text}

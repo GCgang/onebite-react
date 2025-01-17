@@ -1,44 +1,15 @@
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import New from './pages/New';
 import Diary from './pages/Diary';
 import Edit from './pages/Edit';
 import NotFound from './pages/NotFound';
-import { getEmotionImage } from './util/getEmotionImage';
-import Button from './components/Button';
-import Header from './components/Header';
+import DiaryContextProvider from './context/DiaryContext';
 
 function App() {
-  const nav = useNavigate();
-
-  const onClickButton = () => {
-    nav('/new');
-  };
   return (
-    <>
-      <Header
-        title='제목'
-        leftChild={<Button text='left' />}
-        rightChild={<Button text='right' />}
-      ></Header>
-      <Button text='버튼' />
-      <Button type='POSITIVE' text='버튼' />
-      <Button type='NEGATIVE' text='버튼' />
-      <div>
-        <img src={getEmotionImage(1) ?? ''} alt='Emotion' />
-        <img src={getEmotionImage(2) ?? ''} alt='Emotion' />
-        <img src={getEmotionImage(3) ?? ''} alt='Emotion' />
-        <img src={getEmotionImage(4) ?? ''} alt='Emotion' />
-        <img src={getEmotionImage(5) ?? ''} alt='Emotion' />
-      </div>
-      <div>
-        <Link to={'/'}>Home</Link>
-        <Link to={'/new'}>New</Link>
-        <Link to={'/diary/1'}>Diary</Link>
-        <Link to={'/edit/1'}>Edit</Link>
-        <button onClick={onClickButton}>New 페이지로 이동</button>
-      </div>
+    <DiaryContextProvider>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/new' element={<New />} />
@@ -46,7 +17,7 @@ function App() {
         <Route path='/edit/:id' element={<Edit />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-    </>
+    </DiaryContextProvider>
   );
 }
 

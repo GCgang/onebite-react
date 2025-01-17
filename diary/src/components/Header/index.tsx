@@ -1,13 +1,13 @@
 import './Header.css';
 import { ReactNode } from 'react';
 
-interface IHeaderProps {
+interface HeaderProps {
   title: string;
   leftChild: ReactNode;
   rightChild: ReactNode;
 }
 
-export default function Header({ title, leftChild, rightChild }: IHeaderProps) {
+export default function Header({ title, leftChild, rightChild }: HeaderProps) {
   return (
     <header className='Header'>
       <div className='header_left'>{leftChild}</div>
