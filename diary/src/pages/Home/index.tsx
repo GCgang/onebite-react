@@ -44,14 +44,12 @@ export default function Home() {
 
   return (
     <main>
-      <div>
-        <Header
-          title={`${pivotDate.getFullYear()}년 ${pivotDate.getMonth() + 1}월`}
-          leftChild={<Button text='<' onClick={onDecreaseMonth} />}
-          rightChild={<Button text='>' onClick={onIncreaseMonth} />}
-        />
-        <DiaryList data={monthlyData} />
-      </div>
+      <Header
+        title={`${pivotDate.getFullYear()}년 ${pivotDate.getMonth() + 1}월`}
+        leftChild={<Button text='<' onClick={onDecreaseMonth} />}
+        rightChild={<Button text='>' onClick={onIncreaseMonth} />}
+      />
+      <DiaryList data={monthlyData} />
     </main>
   );
 }

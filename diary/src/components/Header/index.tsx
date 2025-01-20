@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 
 interface HeaderProps {
   title: string;
-  leftChild: ReactNode;
-  rightChild: ReactNode;
+  leftChild?: ReactNode;
+  rightChild?: ReactNode;
 }
 
 export default function Header({ title, leftChild, rightChild }: HeaderProps) {
