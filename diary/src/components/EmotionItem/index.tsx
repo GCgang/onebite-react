@@ -5,14 +5,17 @@ interface EmotionItemProps {
   emotionId: number;
   emotionName: string;
   isSelected: boolean;
+  onClick: () => void;
 }
 export default function EmotionItem({
   emotionId,
   emotionName,
   isSelected,
+  onClick,
 }: EmotionItemProps) {
   return (
     <div
+      onClick={onClick}
       className={`EmotionItem ${
         isSelected ? `EmotionItem_on_${emotionId}` : ''
       }`}

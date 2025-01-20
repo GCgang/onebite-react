@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 export interface DiaryEntry {
-  id: number;
+  id?: number;
   createDate: number;
   emotionId: number;
   content: string;
@@ -69,7 +69,7 @@ function reducer(state: State, action: Action): State {
 }
 const DiaryStateContext = createContext<State | null>(null);
 const DiaryDispatchContext = createContext<{
-  onCreate: (createDate: number, emotionId: number, content: string) => void;
+  onCreate: (entry: DiaryEntry) => void;
   onDelete: (id: number) => void;
   onUpdate: (entry: DiaryEntry) => void;
 } | null>(null);
@@ -82,14 +82,12 @@ export default function DiaryContextProvider({
   const [state, dispatch] = useReducer(reducer, mockData);
   const idRef = useRef<number>(mockData.length + 1);
 
-  const onCreate = (createDate: number, emotionId: number, content: string) => {
+  const onCreate = (entry: DiaryEntry) => {
     dispatch({
       type: 'CREATE',
       data: {
         id: idRef.current++,
-        createDate,
-        emotionId,
-        content,
+        ...entry,
       },
     });
   };

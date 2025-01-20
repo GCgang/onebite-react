@@ -19,7 +19,7 @@ export default function DiaryList({ data }: DiaryListProps) {
 
   const getSortedData = () => {
     return data.sort((a, b) => {
-      if (sortedType === 'latest') {
+      if (sortedType === 'oldest') {
         return Number(a.createDate) - Number(b.createDate);
       } else {
         return Number(b.createDate) - Number(a.createDate);
