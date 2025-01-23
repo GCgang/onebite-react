@@ -1,33 +1,20 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import {
-  DiaryEntry,
-  useDiary,
-  useDiaryDispatch,
-} from '../../context/DiaryContext';
+import { DiaryEntry, useDiaryDispatch } from '../../context/DiaryContext';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Editor from '../../components/Editor';
-import { useEffect, useState } from 'react';
+import useCurrentDiary from '../../hooks/useCurrentDiary';
 
 export default function Edit() {
   const { id } = useParams<{ id: string }>();
   const nav = useNavigate();
-  const diary = useDiary();
   const { onUpdate, onDelete } = useDiaryDispatch();
-  const [curDiaryItem, setCurDiaryItem] = useState<DiaryEntry>();
+  const currentDiary = useCurrentDiary(id!);
 
-  useEffect(() => {
-    const currentDiaryItem = diary.find((item) => String(item.id) === id);
-
-    if (!currentDiaryItem) {
-      window.alert('존재하지 않는 일기입니다.');
-      nav('/', { replace: true });
-      return;
-    }
-
-    setCurDiaryItem(currentDiaryItem);
-  }, [id]);
-
+  if (!currentDiary) {
+    return <div>데이터 로딩중...!</div>;
+  }
+  
   const onClickDelete = () => {
     if (window.confirm('일기를 정말 삭제할까요 ? 다시 복구되지 않습니다.')) {
       onDelete(Number(id));
@@ -51,7 +38,7 @@ export default function Edit() {
           <Button text='삭제하기' type='NEGATIVE' onClick={onClickDelete} />
         }
       />
-      <Editor initData={curDiaryItem} onSubmit={onSubmit} />
+      <Editor initData={currentDiary} onSubmit={onSubmit} />
     </main>
   );
 }
