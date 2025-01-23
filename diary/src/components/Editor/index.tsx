@@ -3,48 +3,31 @@ import Button from '../Button';
 import EmotionItem from '../EmotionItem';
 import { DiaryEntry } from '../../context/DiaryContext';
 import { useNavigate } from 'react-router-dom';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { emotionList } from '../../util/constant';
+import { getStringedDate } from '../../util/getStringedDate';
 
 interface EditorProps {
+  initData?: DiaryEntry;
   onSubmit: (input: DiaryEntry) => void;
 }
-const emotionList = [
-  {
-    emotionId: 1,
-    emotionName: '완전 좋음',
-  },
-  {
-    emotionId: 2,
-    emotionName: '좋음',
-  },
-  {
-    emotionId: 3,
-    emotionName: '그럭저럭',
-  },
-  {
-    emotionId: 4,
-    emotionName: '나쁨',
-  },
-  {
-    emotionId: 5,
-    emotionName: '끔찍함',
-  },
-];
 
-const getStringedDate = (targetDate: Date) => {
-  const year = targetDate.getFullYear();
-  const month = String(targetDate.getMonth() + 1).padStart(2, '0');
-  const date = String(targetDate.getDate()).padStart(2, '0');
-  return `${year}-${month}-${date}`;
-};
-
-export default function Editor({ onSubmit }: EditorProps) {
+export default function Editor({ initData, onSubmit }: EditorProps) {
   const [input, setInput] = useState<DiaryEntry>({
     createDate: new Date().getTime(),
     emotionId: 3,
     content: '',
   });
   const nav = useNavigate();
+
+  useEffect(() => {
+    if (initData) {
+      setInput({
+        ...initData,
+      });
+    }
+  }, [initData]);
+
   const onChangeInput = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -62,6 +45,7 @@ export default function Editor({ onSubmit }: EditorProps) {
       emotionId,
     }));
   };
+
   const onSubmitButtonClick = () => {
     onSubmit(input);
   };
@@ -94,6 +78,7 @@ export default function Editor({ onSubmit }: EditorProps) {
         <h4>오늘의 일기</h4>
         <textarea
           name='content'
+          value={input.content}
           placeholder='오늘은 어땠나요?'
           onChange={onChangeInput}
         />
